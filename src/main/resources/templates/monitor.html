@@ -1,0 +1,253 @@
+﻿<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- Meta-Information -->
+    <title>Zawya Admin Panel</title>
+    <meta charset="utf-8">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Vendor: Bootstrap 4 Stylesheets  -->
+    <link rel="stylesheet" th:href="@{/css/jquery-ui.min.css}">
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" type="text/css">
+
+    <!-- Our Website CSS Styles -->
+    <link rel="stylesheet" th:href="@{/css/icons.min.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/css/main.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/css/responsive.css}" type="text/css">
+
+    <!-- Color Scheme -->
+    <link rel="stylesheet" th:href="@{/css/color-schemes/color.css}" type="text/css" title="color3">
+    <link rel="alternate stylesheet" th:href="@{/css/color-schemes/color1.css}" title="color1">
+    <link rel="alternate stylesheet" th:href="@{/css/color-schemes/color2.css}" title="color2">
+    <link rel="alternate stylesheet" th:href="@{/css/color-schemes/color4.css}" title="color4">
+    <link rel="alternate stylesheet" th:href="@{/css/color-schemes/color5.css}" title="color5">
+</head>
+<body class="expand-data panel-data">
+<div class="topbar">
+  <div class="logo">
+    <h1><a href="#" title=""><img src="images/logo1.png" alt="" /></a></h1>
+  </div>
+  <div class="topbar-data">
+      <form class="topbar-search" action="/monitor" method="post" >
+          <button type="submit"><i class="ion-ios-search-strong"></i></button>
+          <input type="text" name="search"  placeholder="请输入货号" />
+      </form>
+
+  </div>
+</div><!-- Topbar -->
+
+<header class="side-header light-skin expand-header">
+  <div class="nav-head">Main Navigation <span class="menu-trigger"><i class="ion-android-menu"></i></span></div>
+  <nav class="custom-scrollbar">
+    <a href="/monitor" title=""><h4>Features</h4></a>
+      <ul class="drp-sec">
+          <li><a href="/monitor" title=""><i class="ion-crop"></i>监控</a></li>
+          <li><a href="/task" title=""><i class="ion-podium"></i>任务</a></li>
+          <li><a href="/order" title=""><i class="ion-podium"></i>订单</a></li>
+          <li><a href="/persion" title=""><i class="ion-podium"></i>人员信息</a></li>
+          <li><a href="/promotion" title=""><i class="ion-podium"></i>折扣码</a></li>
+      </ul>
+
+  </nav>
+</header><!-- Side Header -->
+
+<div class="option-panel">
+  <span class="panel-btn"><i class="fa ion-android-settings fa-spin"></i></span>
+  <div class="color-panel">
+    <h4>Text Color</h4>
+    <span class="color1" onclick="setActiveStyleSheet('color1'); return false;"><i></i></span>
+    <span class="color2" onclick="setActiveStyleSheet('color2'); return false;"><i></i></span>
+    <span class="color3" onclick="setActiveStyleSheet('color'); return false;"><i></i></span>
+    <span class="color4" onclick="setActiveStyleSheet('color4'); return false;"><i></i></span>
+    <span class="color5" onclick="setActiveStyleSheet('color5'); return false;"><i></i></span>
+  </div>
+</div><!-- Options Panel -->
+
+<div class="panel-content">
+
+    <div class="widget pad50-65">
+        <div class="widget-title2">
+            <a href="/monitor"><h4>监控程序</h4></a>
+            <div class="gender-box"  >
+                <span style="float: right" class="rdio-bx"><input type="radio" name="filter" id="all"  th:onchange="'javascript:filter(0)'" /><label for="all">全部</label></span>
+                <span style="float: right" class="rdio-bx"><input type="radio" name="filter" id="iim"  th:onchange="'javascript:filter(1)'" /><label for="iim">已参与的</label> </span>
+                <!--<span style="float: right" class="rdio-bx"><input type="radio" name="filter" id="threadDay"  th:onchange="'javascript:filter(11)'" /><label for="threadDay">近几天的</label> </span>-->
+                <span style="float: right" class="rdio-bx"><input type="radio" name="filter" id="confirmDay"  th:onchange="'javascript:filter(12)'" /><label for="confirmDay">有准确发售时间的</label> </span>
+                <span style="float: right" class="rdio-bx"><input type="radio" name="filter" id="replenish"  th:onchange="'javascript:filter(13)'" /><label for="replenish">可能会补货的</label> </span>
+            </div>
+        </div>
+        <table class="table">
+            <thead class="thead-inverse">
+                <tr>
+                    <th>#</th>
+                    <th>full name</th>
+                    <th>method</th>
+                    <th>style color</th>
+                    <th>price</th>
+                    <th>entry time</th>
+                    <!--<th>发售结束时间</th>-->
+                    <th>view time</th>
+                    <!--<th>性别</th>-->
+                    <th>Publish Type</th>
+                    <th>limit</th>
+                    <th>status</th>
+                    <!--<th>发售频道</th>-->
+                    <!--<th>现在是否能购买</th>-->
+                    <!--<th>折扣</th>-->
+                    <th>Image</th>
+                    <th>Option</th>
+                    <th>Option</th>
+                </tr>
+            </thead>
+            <tbody>
+            <td >
+            </td>
+                <tr th:each="page,pageState:${monitor}">
+                    <th scope="row" th:text="${page.getId()}">1</th>
+                    <td th:text="${page.getFullTitle()}">Mark</td>
+                    <td th:text="${page.getMethod()}">Mark</td>
+                    <td ><a th:href="${'https://www.nike.com/cn/t/ABC2934JWER/'+page.getStyleColor()}" th:text="${page.getStyleColor()}" target="_blank" style="color: firebrick"></a></td>
+                    <td th:text="${page.getCurrentPrice()}">Mark</td>
+                    <td th:text="${page.getStartEntryDate()}">Mark</td>
+
+                    <td th:text="${page.getViewStartDate()}">Mark</td>
+
+                    <th th:text="${page.getPublishType()}"></td>
+                    <th th:text="${page.getQuantityLimit()}"></td>
+                    <td th:text="${page.getSaleStatus()}">Mark</td>
+                    <!--<td >-->
+                        <!--<font  th:if="${page.getPromo()==0}" >原价</font>-->
+                        <!--<font  th:if="${page.getPromo()==1}" >折扣</font>-->
+                    <!--</td>-->
+                    <td><a th:href="${page.getImg()}"> <img th:src="${page.getImg()}" width="120px" href="120px"></a></td>
+                    <td >
+                        <button  th:onclick="getLimit([[${page.getId()}]],[[${page.getDetailUrlId()}]])"    class="btn btn-primary fa fa-cart-plus" data-toggle="modal" data-target=".bd-example-modal-lg"> Cart </button>
+                    </td>
+                    <th >
+                        <div class="fa-hover"><a target="_blank" th:href="${'/task?style_color='+page.getStyleColor()}"><i class="fa fa-mail-forward" aria-hidden="true"></i>task</a></div>
+                    </td>
+                    <!--<th >-->
+                        <!--<div class="fa-hover"><a target="_blank" th:href="${'/order?style_color='+page.getStyleColor()}"><i class="fa fa-mail-forward" aria-hidden="true"></i>order</a></div>-->
+                    <!--</td>-->
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<!-- Panel Content -->
+<div class="modal fade bd-example-modal-lg" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">添加任务</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+            </div>
+            <div class="modal-body" style=" overflow:scroll;">
+                <div class="widget-title2">
+                    <h4>注意事项</h4>
+                    <span>不允许不同尺码共用一组人员信息,这会导致全军覆没!</span>
+                </div>
+                <form class="form-wrp" method="post" action="/saveTask" >
+                    <input type="hidden" name="monitorId" id="monitorId">
+                    <input type="hidden" name="detailUrlId" id="detailUrlId">
+                        <div class="gender-box" th:each="sizeG,indexG:${isize}">
+                            <strong>尺码</strong>
+                            <span class="rdio-bx" th:each="size,index:${sizeG}" >
+                                <input type='checkbox' name='chooseSize'  th:value="${size}" th:id="${index}"   />
+                                <label th:for="${index}" th:text="${size}">42</label>
+                            </span>
+                        </div>
+                    <div class="col-md-12 col-sm-12 col-lg-12">
+                        <button class="green-bg brd-rd5" type="submit"><i class="fa fa-paper-plane"></i> 确定添加</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer >
+    <div class="pgntn style4" style="height: 10px;padding-top: 0px;margin-top: -30px">
+        <ul class="pgntn-lst">
+            <li class="prv" th:if="${monitor.hasPrevious()}" ><a class="brd-rd50" th:href="${'/monitor?page='+monitor.previousPageable().pageNumber+'&search='+search+'&tap='+tap}" title=""><i class="fa fa-angle-double-left"></i></a></li>
+            <li><span class="active" th:text="${monitor.getNumber()}">2</span></li>
+            <li><span>/总页数</span></li>
+            <li><a href="#" title="" th:text="${monitor.totalPages }">1</a></li>
+            <li class="nxt" th:if="${monitor.hasNext()}"><a class="brd-rd50" th:href="${'/monitor?page='+monitor.nextPageable().pageNumber+'&search='+search+'&tap='+tap}" title=""><i class="fa fa-angle-double-right"></i></a></li>
+        </ul>
+    </div>
+    <span th:text="${'库中总共商品数量: '+monitor.getTotalElements()+' 条'}"></span>
+</footer>
+
+<script>
+
+  function getLimit( monitorId,detailUrlId){
+    $('#monitorId').val(monitorId);
+    $('#detailUrlId').val(detailUrlId);
+    $.post("/quantityLimit/"+monitorId,
+            {
+              name:"test",
+              url:"http://www.runoob.com"
+            },
+            function(data,status){
+             var  json=$.parseJSON(data);
+              $.each(json, function (key,value) {
+                  $('.limit').append("<option >"+value+"</option>");
+              });
+            });
+  }
+  function setStyleColor(styleColor) {
+    $('#cannelTask').attr('href','/monitor/clearAll/'+styleColor);
+  }
+
+  function filter(val){
+    if(val==0){
+      window.location.href='/monitor';
+    }else if(val==1){
+      window.location.href='/monitor?tap=alreadyInvolved';
+    }else if(val==11){
+        window.location.href='/monitorFilter/11';
+    }else if(val==12){
+        window.location.href='/monitor?tap=exactTime';
+    }else if(val==13){
+        window.location.href='/monitor?tap=replenishStatus';
+    }
+
+  }
+
+
+
+</script>
+<!-- Vendor: Javascripts -->
+<script th:src="@{/js/jquery.min.js}" type="text/javascript"></script>
+<!-- Vendor: Followed by our custom Javascripts -->
+<script th:src="@{/js/bootstrap.min.js}" type="text/javascript"></script>
+<script th:src="@{/js/jquery-ui.min.js}" type="text/javascript"></script>
+<script th:src="@{/js/select2.min.js}" type="text/javascript"></script>
+<script th:src="@{/js/slick.min.js}" type="text/javascript"></script>
+
+<!-- Our Website Javascripts -->
+<script th:src="@{/js/isotope.min.js}" type="text/javascript"></script>
+<script th:src="@{/js/isotope-int.js}" type="text/javascript"></script>
+<script th:src="@{/js/jquery.counterup.js}" type="text/javascript"></script>
+<script th:src="@{/js/waypoints.min.js}" type="text/javascript"></script>
+<script th:src="@{/js/highcharts.js}" type="text/javascript"></script>
+<script th:src="@{/js/exporting.js}" type="text/javascript"></script>
+<script th:src="@{/js/highcharts-more.js}" type="text/javascript"></script>
+<script th:src="@{/js/moment.min.js}" type="text/javascript"></script>
+<script th:src="@{/js/jquery.circliful.min.js}" type="text/javascript"></script>
+<script th:src="@{/js/fullcalendar.min.js}" type="text/javascript"></script>
+<script th:src="@{/js/jquery.downCount.js}" type="text/javascript"></script>
+<script th:src="@{/js/jquery.bootstrap-touchspin.min.js}" type="text/javascript"></script>
+<script th:src="@{/js/jquery.formtowizard.js}" type="text/javascript"></script>
+<script th:src="@{/js/form-validator.min.js}" type="text/javascript"></script>
+<script th:src="@{/js/form-validator-lang-en.min.js}" type="text/javascript"></script>
+<script th:src="@{/js/cropbox-min.js}" type="text/javascript"></script>
+<script th:src="@{/js/jquery.slimscroll.min.js}" type="text/javascript"></script>
+<script th:src="@{/js/ion.rangeSlider.min.js}" type="text/javascript"></script>
+<script th:src="@{/js/jquery.poptrox.min.js}" type="text/javascript"></script>
+<script th:src="@{/js/styleswitcher.js}" type="text/javascript"></script>
+<script th:src="@{/js/main.js}" type="text/javascript"></script>
+</body>
+</html>

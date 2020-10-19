@@ -1,0 +1,205 @@
+﻿<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- Meta-Information -->
+    <title>Zawya Admin Panel</title>
+    <meta charset="utf-8">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Vendor: Bootstrap 4 Stylesheets  -->
+    <link rel="stylesheet" href="css/jquery-ui.min.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
+
+    <!-- Our Website CSS Styles -->
+    <link rel="stylesheet" href="css/icons.min.css" type="text/css">
+    <link rel="stylesheet" href="css/main.css" type="text/css">
+    <link rel="stylesheet" href="css/responsive.css" type="text/css">
+
+    <!-- Color Scheme -->
+    <link rel="stylesheet" href="css/color-schemes/color.css" type="text/css" title="color3">
+    <link rel="alternate stylesheet" href="css/color-schemes/color1.css" title="color1">
+    <link rel="alternate stylesheet" href="css/color-schemes/color2.css" title="color2">
+    <link rel="alternate stylesheet" href="css/color-schemes/color4.css" title="color4">
+    <link rel="alternate stylesheet" href="css/color-schemes/color5.css" title="color5">
+</head>
+<body class="expand-data panel-data">
+<div class="topbar">
+  <div class="logo">
+    <h1><a href="#" title=""><img src="images/logo1.png" alt="" /></a></h1>
+  </div>
+  <div class="topbar-data">
+    <form class="topbar-search" action="/taskSearch" method="post">
+      <button type="submit"><i class="ion-ios-search-strong"></i></button>
+      <input type="text" name="style_color" th:value="${style_color}" placeholder="先输入货号搜索" />
+    </form>
+  </div>
+
+</div><!-- Topbar -->
+
+<header class="side-header light-skin expand-header">
+    <div class="nav-head">Main Navigation <span class="menu-trigger"><i class="ion-android-menu"></i></span></div>
+    <nav class="custom-scrollbar">
+        <h4>人员信息</h4>
+        <ul class="drp-sec">
+            <li><a href="/monitor" title=""><i class="ion-crop"></i>监控</a></li>
+            <li><a href="/task" title=""><i class="ion-podium"></i>任务</a></li>
+            <li><a href="/order" title=""><i class="ion-podium"></i>订单</a></li>
+            <li><a href="/persion" title=""><i class="ion-podium"></i>人员信息</a></li>
+            <li><a href="/promotion" title=""><i class="ion-podium"></i>折扣码</a></li>
+        </ul>
+    </nav>
+</header><!-- Side Header -->
+
+<div class="option-panel">
+  <span class="panel-btn"><i class="fa ion-android-settings fa-spin"></i></span>
+  <div class="color-panel">
+    <h4>Text Color</h4>
+    <span class="color1" onclick="setActiveStyleSheet('color1'); return false;"><i></i></span>
+    <span class="color2" onclick="setActiveStyleSheet('color2'); return false;"><i></i></span>
+    <span class="color3" onclick="setActiveStyleSheet('color'); return false;"><i></i></span>
+    <span class="color4" onclick="setActiveStyleSheet('color4'); return false;"><i></i></span>
+    <span class="color5" onclick="setActiveStyleSheet('color5'); return false;"><i></i></span>
+  </div>
+</div><!-- Options Panel -->
+
+<div class="panel-content">
+
+    <div class="widget pad50-65">
+        <div class="widget-title2">
+            <h4>账号信息</h4>
+          <div class="btns-wrp" >
+              <div class="btns-list" >
+                <div class="file-upload-box" >
+                  <strong>File Input:</strong>
+                  <div class="file-box">
+                    <label class="fileContainer">
+                      <span class="blue-bg brd-rd5">上传Excel</span>
+                      <font>未选文件</font>
+                      <input type="file" id="fileBtn" th:onchange="upload()" />
+                    </label>
+                  </div>
+                </div>
+                <div class="progress brd-rd0">
+                  <div class="progress-bar blue-bg" id="process" style="width: 0%;">0%</div>
+                </div>
+                <a href="/excel/example.xlsx" class="brd-rd5 btn btn-secondary" >Excel下载示例</a>
+                <a href="#" class="brd-rd5 btn btn-info">批量登录</a>
+                <a href="#" class="brd-rd5 btn btn-success">重试登录</a>
+              </div>
+          </div>
+
+        </div>
+        <table class="table">
+            <thead class="thead-inverse">
+                <tr>
+                    <th>#</th>
+                    <th>login status</th>
+                    <th>first Name</th>
+                    <th>last Name</th>
+                    <th>city</th>
+                    <th>区</th>
+                    <th>add1</th>
+                    <th>add2</th>
+                    <th>post Code</th>
+                    <th>Email</th>
+                    <th>Phone Number</th>
+                    <th>state</th>
+                    <th>Pay</th>
+                    <th>Group</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="persion,pageState:${persions}">
+                    <th scope="row" th:text="${persion.getId()}">1</th>
+                    <!--<td th:text="${persion.getUsername()}">Mark</td>-->
+                    <!--<td th:text="${persion.getPassword()}">Mark</td>-->
+                    <td th:text="${persion.getLoginStatus()}">Mark</td>
+                    <!--<td th:text="${persion.getPromoExclusions()}">Mark</td>-->
+                    <td th:text="${persion.getFirstName()}">Mark</td>
+                    <td th:text="${persion.getLastName()}">Mark</td>
+                    <td th:text="${persion.getCity()}">Mark</td>
+                    <td th:text="${persion.getCounty()}">Mark</td>
+                    <td th:text="${persion.getAddress1()}">Mark</td>
+                    <td th:text="${persion.getAddress2()}">Mark</td>
+                    <td th:text="${persion.getPostalCode()}">Mark</td>
+                    <td th:text="${persion.getEmail()}">Mark</td>
+                    <td th:text="${persion.getPhoneNumber()}">Mark</td>
+                    <td th:text="${persion.getState()}">Mark</td>
+                    <td th:text="${persion.getType()}">Mark</td>
+                    <td th:text="${persion.getIgroup()}">Mark</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div><!-- Panel Content -->
+
+<footer>
+  <p>Copyright <a href="http://www.bootstrapmb.com" title="">Example Company</a> &amp; 2017 - 2018</p>
+  <span th:text="${'库中共有数据'+persions.getTotalElements()+'条'}"></span>
+</footer>
+
+<script>
+    var upload=function(){
+    var formData = new FormData();
+    formData.append("file",$("#fileBtn")[0].files[0]);
+    $.ajax({
+      url:"/persionUpload",
+      type:"post",
+      data:formData,
+      contentType: false,//必须false才会自动加上正确的Content-Type
+      processData: false,
+      xhr:function(){
+        myXhr = $.ajaxSettings.xhr();
+        if(myXhr.upload){ //检查upload属性是否存在
+          //绑定progress事件的回调函数
+          myXhr.upload.addEventListener('progress',function(e){
+            var curr=e.loaded;
+            var total=e.total;
+            process=curr/total*100;
+            console.log(process);
+            $("#process").css("width",process+"%");
+            $("#process").text(process+"%");
+          }, false);
+        }
+        return myXhr;
+      },
+      success:function(data){
+        console.log(data);
+      }
+    });
+  }
+</script>
+
+<!-- Vendor: Javascripts -->
+<script src="js/jquery.min.js" type="text/javascript"></script>
+<!-- Vendor: Followed by our custom Javascripts -->
+<script src="js/bootstrap.min.js" type="text/javascript"></script>
+<script src="js/jquery-ui.min.js" type="text/javascript"></script>
+<script src="js/select2.min.js" type="text/javascript"></script>
+<script src="js/slick.min.js" type="text/javascript"></script>
+
+<!-- Our Website Javascripts -->
+<script src="js/isotope.min.js" type="text/javascript"></script>
+<script src="js/isotope-int.js" type="text/javascript"></script>
+<script src="js/jquery.counterup.js" type="text/javascript"></script>
+<script src="js/waypoints.min.js" type="text/javascript"></script>
+<script src="js/highcharts.js" type="text/javascript"></script>
+<script src="js/exporting.js" type="text/javascript"></script>
+<script src="js/highcharts-more.js" type="text/javascript"></script>
+<script src="js/moment.min.js" type="text/javascript"></script>
+<script src="js/jquery.circliful.min.js" type="text/javascript"></script>
+<script src="js/fullcalendar.min.js" type="text/javascript"></script>
+<script src="js/jquery.downCount.js" type="text/javascript"></script>
+<script src="js/jquery.bootstrap-touchspin.min.js" type="text/javascript"></script>
+<script src="js/jquery.formtowizard.js" type="text/javascript"></script>
+<script src="js/form-validator.min.js" type="text/javascript"></script>
+<script src="js/form-validator-lang-en.min.js" type="text/javascript"></script>
+<script src="js/cropbox-min.js" type="text/javascript"></script>
+<script src="js/jquery.slimscroll.min.js" type="text/javascript"></script>
+<script src="js/ion.rangeSlider.min.js" type="text/javascript"></script>
+<script src="js/jquery.poptrox.min.js" type="text/javascript"></script>
+<script src="js/styleswitcher.js" type="text/javascript"></script>
+<script src="js/main.js" type="text/javascript"></script>
+</body>
+</html>

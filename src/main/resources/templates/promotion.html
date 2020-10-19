@@ -1,0 +1,181 @@
+﻿<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- Meta-Information -->
+    <title>Zawya Admin Panel</title>
+    <meta charset="utf-8">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Vendor: Bootstrap 4 Stylesheets  -->
+    <link rel="stylesheet" th:href="@{/css/jquery-ui.min.css}">
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" type="text/css">
+
+    <!-- Our Website CSS Styles -->
+    <link rel="stylesheet" th:href="@{/css/icons.min.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/css/main.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/css/responsive.css}" type="text/css">
+
+    <!-- Color Scheme -->
+    <link rel="stylesheet" th:href="@{/css/color-schemes/color.css}" type="text/css" title="color3">
+    <link rel="alternate stylesheet" th:href="@{/css/color-schemes/color1.css}" title="color1">
+    <link rel="alternate stylesheet" th:href="@{/css/color-schemes/color2.css}" title="color2">
+    <link rel="alternate stylesheet" th:href="@{/css/color-schemes/color4.css}" title="color4">
+    <link rel="alternate stylesheet" th:href="@{/css/color-schemes/color5.css}" title="color5">
+</head>
+<body class="expand-data panel-data">
+<div class="topbar">
+  <div class="logo">
+    <h1><a href="#" title=""><img src="images/logo1.png" alt="" /></a></h1>
+  </div>
+
+</div><!-- Topbar -->
+
+<header class="side-header light-skin expand-header">
+    <div class="nav-head">Main Navigation <span class="menu-trigger"><i class="ion-android-menu"></i></span></div>
+    <nav class="custom-scrollbar">
+        <h4>账号</h4>
+        <ul class="drp-sec">
+            <li><a href="/monitor" title=""><i class="ion-crop"></i>监控</a></li>
+            <li><a href="/task" title=""><i class="ion-podium"></i>任务</a></li>
+            <li><a href="/order" title=""><i class="ion-podium"></i>订单</a></li>
+            <li><a href="/persion" title=""><i class="ion-podium"></i>人员信息</a></li>
+            <li><a href="/promotion" title=""><i class="ion-podium"></i>折扣码</a></li>
+        </ul>
+    </nav>
+</header><!-- Side Header -->
+
+<div class="option-panel">
+  <span class="panel-btn"><i class="fa ion-android-settings fa-spin"></i></span>
+  <div class="color-panel">
+    <h4>Text Color</h4>
+    <span class="color1" onclick="setActiveStyleSheet('color1'); return false;"><i></i></span>
+    <span class="color2" onclick="setActiveStyleSheet('color2'); return false;"><i></i></span>
+    <span class="color3" onclick="setActiveStyleSheet('color'); return false;"><i></i></span>
+    <span class="color4" onclick="setActiveStyleSheet('color4'); return false;"><i></i></span>
+    <span class="color5" onclick="setActiveStyleSheet('color5'); return false;"><i></i></span>
+  </div>
+</div><!-- Options Panel -->
+
+<div class="panel-content">
+
+    <div class="widget pad50-65">
+        <div class="widget-title2">
+            <h4 th:text="${'折扣码-Redis中折扣码数量:'}">折扣码</h4>
+            <div class="gender-box"  >
+                <span style="float: right" class="rdio-bx"><input type="radio" name="filter" id="all"  th:onchange="'javascript:filter(1)'" /><label for="all">已经使用的</label></span>
+                <span  style="float: right" >&nbsp;&nbsp;</span>
+                <a href="/delpromotion" style="float: right"  class="brd-rd5 btn btn-danger btn-xs">清空所有</a>
+            </div>
+          <div class="btns-wrp" >
+              <div class="btns-list" >
+                <div class="file-upload-box" >
+                  <strong>File Input:</strong>
+                  <div class="file-box">
+                    <label class="fileContainer">
+                      <span class="blue-bg brd-rd5">上传折扣码Txt</span>
+                      <font>未选文件</font>
+                      <input type="file" id="fileBtn" th:onchange="upload()" />
+                    </label>
+                  </div>
+                </div>
+                <div class="progress brd-rd0">
+                  <div class="progress-bar blue-bg" id="process" style="width: 0%;">0%</div>
+                </div>
+              </div>
+          </div>
+
+        </div>
+        <table class="table">
+            <thead class="thead-inverse">
+                <tr>
+                    <th>可用的折扣码折扣码</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="promotion:${promotions}">
+                    <td th:text="${promotion}">Mark</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div><!-- Panel Content -->
+
+
+<footer>
+    <p>Copyright <a href="http://www.bootstrapmb.com" title="">Example Company</a> &amp; 2017 - 2018</p>
+    <span th:text="${'库中总折扣码数量: '+promotions.size()+' 条'}"></span>
+</footer>
+
+<script>
+    var upload=function(){
+    var formData = new FormData();
+    formData.append("file",$("#fileBtn")[0].files[0]);
+    $.ajax({
+      url:"/promotionUpload",
+      type:"post",
+      data:formData,
+      contentType: false,//必须false才会自动加上正确的Content-Type
+      processData: false,
+      xhr:function(){
+        myXhr = $.ajaxSettings.xhr();
+        if(myXhr.upload){ //检查upload属性是否存在
+          //绑定progress事件的回调函数
+          myXhr.upload.addEventListener('progress',function(e){
+            var curr=e.loaded;
+            var total=e.total;
+            process=curr/total*100;
+            console.log(process);
+            $("#process").css("width",process+"%");
+            $("#process").text(process+"%");
+          }, false);
+        }
+        return myXhr;
+      },
+      success:function(data){
+        console.log(data);
+      }
+    });
+  }
+
+    function filter(val){
+         if(val==1){
+            window.location.href='/promotionInvalid';
+        }
+
+    }
+
+</script>
+
+<!-- Vendor: Javascripts -->
+<script th:src="@{/js/jquery.min.js}" type="text/javascript"></script>
+<!-- Vendor: Followed by our custom Javascripts -->
+<script th:src="@{/js/bootstrap.min.js}" type="text/javascript"></script>
+<script th:src="@{/js/jquery-ui.min.js}" type="text/javascript"></script>
+<script th:src="@{/js/select2.min.js}" type="text/javascript"></script>
+<script th:src="@{/js/slick.min.js}" type="text/javascript"></script>
+
+<!-- Our Website Javascripts -->
+<script th:src="@{/js/isotope.min.js}" type="text/javascript"></script>
+<script th:src="@{/js/isotope-int.js}" type="text/javascript"></script>
+<script th:src="@{/js/jquery.counterup.js}" type="text/javascript"></script>
+<script th:src="@{/js/waypoints.min.js}" type="text/javascript"></script>
+<script th:src="@{/js/highcharts.js}" type="text/javascript"></script>
+<script th:src="@{/js/exporting.js}" type="text/javascript"></script>
+<script th:src="@{/js/highcharts-more.js}" type="text/javascript"></script>
+<script th:src="@{/js/moment.min.js}" type="text/javascript"></script>
+<script th:src="@{/js/jquery.circliful.min.js}" type="text/javascript"></script>
+<script th:src="@{/js/fullcalendar.min.js}" type="text/javascript"></script>
+<script th:src="@{/js/jquery.downCount.js}" type="text/javascript"></script>
+<script th:src="@{/js/jquery.bootstrap-touchspin.min.js}" type="text/javascript"></script>
+<script th:src="@{/js/jquery.formtowizard.js}" type="text/javascript"></script>
+<script th:src="@{/js/form-validator.min.js}" type="text/javascript"></script>
+<script th:src="@{/js/form-validator-lang-en.min.js}" type="text/javascript"></script>
+<script th:src="@{/js/cropbox-min.js}" type="text/javascript"></script>
+<script th:src="@{/js/jquery.slimscroll.min.js}" type="text/javascript"></script>
+<script th:src="@{/js/ion.rangeSlider.min.js}" type="text/javascript"></script>
+<script th:src="@{/js/jquery.poptrox.min.js}" type="text/javascript"></script>
+<script th:src="@{/js/styleswitcher.js}" type="text/javascript"></script>
+<script th:src="@{/js/main.js}" type="text/javascript"></script>
+</body>
+</html>

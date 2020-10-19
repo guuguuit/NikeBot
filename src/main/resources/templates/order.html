@@ -1,0 +1,149 @@
+﻿<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <!-- Meta-Information -->
+  <title>Zawya Admin Panel</title>
+  <meta charset="utf-8">
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Vendor: Bootstrap 4 Stylesheets  -->
+  <link rel="stylesheet" href="css/jquery-ui.min.css">
+  <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
+
+  <!-- Our Website CSS Styles -->
+  <link rel="stylesheet" href="css/icons.min.css" type="text/css">
+  <link rel="stylesheet" href="css/main.css" type="text/css">
+  <link rel="stylesheet" href="css/responsive.css" type="text/css">
+
+  <!-- Color Scheme -->
+  <link rel="stylesheet" href="css/color-schemes/color.css" type="text/css" title="color3">
+  <link rel="alternate stylesheet" href="css/color-schemes/color1.css" title="color1">
+  <link rel="alternate stylesheet" href="css/color-schemes/color2.css" title="color2">
+  <link rel="alternate stylesheet" href="css/color-schemes/color4.css" title="color4">
+  <link rel="alternate stylesheet" href="css/color-schemes/color5.css" title="color5">
+</head>
+<body class="expand-data panel-data">
+<div class="topbar">
+  <div class="logo">
+    <h1><a href="#" title=""><img src="images/logo1.png" alt="" /></a></h1>
+  </div>
+  <div class="topbar-data">
+
+  </div>
+
+</div><!-- Topbar -->
+
+<header class="side-header light-skin expand-header">
+  <div class="nav-head">Main Navigation <span class="menu-trigger"><i class="ion-android-menu"></i></span></div>
+  <nav class="custom-scrollbar">
+    <h4>人员信息</h4>
+    <ul class="drp-sec">
+      <li><a href="/monitor" title=""><i class="ion-crop"></i>监控</a></li>
+      <li><a href="/task" title=""><i class="ion-podium"></i>任务</a></li>
+      <li><a href="/order" title=""><i class="ion-podium"></i>订单</a></li>
+      <li><a href="/persion" title=""><i class="ion-podium"></i>人员信息</a></li>
+      <li><a href="/promotion" title=""><i class="ion-podium"></i>折扣码</a></li>
+    </ul>
+
+  </nav>
+</header><!-- Side Header -->
+
+<div class="option-panel">
+  <span class="panel-btn"><i class="fa ion-android-settings fa-spin"></i></span>
+  <div class="color-panel">
+    <h4>Text Color</h4>
+    <span class="color1" onclick="setActiveStyleSheet('color1'); return false;"><i></i></span>
+    <span class="color2" onclick="setActiveStyleSheet('color2'); return false;"><i></i></span>
+    <span class="color3" onclick="setActiveStyleSheet('color'); return false;"><i></i></span>
+    <span class="color4" onclick="setActiveStyleSheet('color4'); return false;"><i></i></span>
+    <span class="color5" onclick="setActiveStyleSheet('color5'); return false;"><i></i></span>
+  </div>
+</div><!-- Options Panel -->
+
+<div class="panel-content">
+
+  <div class="widget pad50-65">
+    <div class="widget-title2">
+      <h4>订单</h4>
+      <div class="gender-box"  >
+        <div style="float: right" th:if="${style_color!=NullPointerException&&!style_color.equals('')}" class="fa-hover"><a th:href="${'/orderdelete?style_color='+style_color}"><i class="fa fa-remove" aria-hidden="true"></i>删除全部</a></div>
+      </div>
+    </div>
+    <table class="table">
+      <thead class="thead-inverse">
+      <tr>
+        <th>#</th>
+        <th>货品</th>
+        <th>订单号</th>
+        <th>邮箱</th>
+        <th>付款连接</th>
+        <th>订单生成时间;</th>
+        <th>付款状态;</th>
+        <th>size</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr th:each="order:${orders}">
+        <th scope="row" th:text="${order.getId()}">1</th>
+        <td th:text="${order.getStyleColor()}">Mark</td>
+        <td th:text="${order.getOrderNum()}">Mark</td>
+        <td th:text="${order.getEmail()}">Mark</td>
+        <td >
+          <a th:href="${'https://www.nike.com/orders/sales/'+order.getOrderNum()}" target="_blank"  class="brd-rd30 btn btn-outline-drk btn-xs">点击付款</a>
+        </td>
+        <td th:text="${order.getOrderCreateTime()}">Mark</td>
+        <td th:text="${order.getPayStatus()+'目前无法追踪...'}">Mark</td>
+        <td th:text="${order.getSize()}">Mark</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div><!-- Panel Content -->
+
+<footer >
+  <div class="pgntn style4" style="height: 10px;padding-top: 0px;margin-top: -30px">
+    <ul class="pgntn-lst">
+      <li class="prv"  th:if="${orders!=null&&orders.hasPrevious()}" ><a class="brd-rd50" th:href="${'/order?page='+orders.previousPageable().pageNumber}" title=""><i class="fa fa-angle-double-left"></i></a></li>
+      <li><span class="active" th:if="${orders!=null}"  th:text="${orders.getNumber()}">2</span></li>
+      <li><span>/总页数</span></li>
+      <li><a href="#" title="" th:if="${orders!=null}"  th:text="${orders.totalPages }">1</a></li>
+      <li class="nxt" th:if="${orders!=null&&orders.hasNext()}"><a class="brd-rd50" th:href="${'/order?page='+orders.nextPageable().pageNumber}" title=""><i class="fa fa-angle-double-right"></i></a></li>
+    </ul>
+  </div>
+  <span  th:if="${orders!=null}"  th:text="${'库中总共商品数量: '+orders.getTotalElements()+' 条'}"></span>
+</footer>
+
+
+<!-- Vendor: Javascripts -->
+<script src="js/jquery.min.js" type="text/javascript"></script>
+<!-- Vendor: Followed by our custom Javascripts -->
+<script src="js/bootstrap.min.js" type="text/javascript"></script>
+<script src="js/jquery-ui.min.js" type="text/javascript"></script>
+<script src="js/select2.min.js" type="text/javascript"></script>
+<script src="js/slick.min.js" type="text/javascript"></script>
+
+<!-- Our Website Javascripts -->
+<script src="js/isotope.min.js" type="text/javascript"></script>
+<script src="js/isotope-int.js" type="text/javascript"></script>
+<script src="js/jquery.counterup.js" type="text/javascript"></script>
+<script src="js/waypoints.min.js" type="text/javascript"></script>
+<script src="js/highcharts.js" type="text/javascript"></script>
+<script src="js/exporting.js" type="text/javascript"></script>
+<script src="js/highcharts-more.js" type="text/javascript"></script>
+<script src="js/moment.min.js" type="text/javascript"></script>
+<script src="js/jquery.circliful.min.js" type="text/javascript"></script>
+<script src="js/fullcalendar.min.js" type="text/javascript"></script>
+<script src="js/jquery.downCount.js" type="text/javascript"></script>
+<script src="js/jquery.bootstrap-touchspin.min.js" type="text/javascript"></script>
+<script src="js/jquery.formtowizard.js" type="text/javascript"></script>
+<script src="js/form-validator.min.js" type="text/javascript"></script>
+<script src="js/form-validator-lang-en.min.js" type="text/javascript"></script>
+<script src="js/cropbox-min.js" type="text/javascript"></script>
+<script src="js/jquery.slimscroll.min.js" type="text/javascript"></script>
+<script src="js/ion.rangeSlider.min.js" type="text/javascript"></script>
+<script src="js/jquery.poptrox.min.js" type="text/javascript"></script>
+<script src="js/styleswitcher.js" type="text/javascript"></script>
+<script src="js/main.js" type="text/javascript"></script>
+</body>
+</html>

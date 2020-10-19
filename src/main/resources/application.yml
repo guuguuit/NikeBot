@@ -1,0 +1,36 @@
+spring:
+  application:
+    name: spring-boot-jpa-hikari
+  jpa:
+    database: mysql
+    show-sql: false
+    generate-ddl: true
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    hibernate:
+      ddl-auto: update
+  datasource:
+    url: jdbc:mysql://ip:3306/数据库名称?useSSL=false&useUnicode=true&characterEncoding=utf8&autoReconnect=true&failOverReadOnly=false
+    username: root
+    password: 密码
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.zaxxer.hikari.HikariDataSource
+    hikari:
+      auto-commit: true
+      minimum-idle: 2
+      idle-timeout: 60000
+      connection-timeout: 30000
+      max-lifetime: 1800000
+      pool-name: DatebookHikariCP
+      maximum-pool-size: 5
+  redis:
+      host: redisip地址
+      port: 6379
+      jedis:
+        pool:
+          max-active: 50
+          max-wait: -1
+          min-idle: 10
+      lettuce:
+        shutdown-timeout: 300000
+      database: 0
+

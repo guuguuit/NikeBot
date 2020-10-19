@@ -1,0 +1,210 @@
+﻿<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- Meta-Information -->
+    <title>Zawya Admin Panel</title>
+    <meta charset="utf-8">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Vendor: Bootstrap 4 Stylesheets  -->
+    <link rel="stylesheet" th:href="@{/css/jquery-ui.min.css}">
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" type="text/css">
+
+    <!-- Our Website CSS Styles -->
+    <link rel="stylesheet" th:href="@{/css/icons.min.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/css/main.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/css/responsive.css}" type="text/css">
+
+    <!-- Color Scheme -->
+    <link rel="stylesheet" th:href="@{/css/color-schemes/color.css}" type="text/css" title="color3">
+    <link rel="alternate stylesheet" th:href="@{/css/color-schemes/color1.css}" title="color1">
+    <link rel="alternate stylesheet" th:href="@{/css/color-schemes/color2.css}" title="color2">
+    <link rel="alternate stylesheet" th:href="@{/css/color-schemes/color4.css}" title="color4">
+    <link rel="alternate stylesheet" th:href="@{/css/color-schemes/color5.css}" title="color5">
+</head>
+<body class="expand-data panel-data">
+<div class="topbar">
+  <div class="logo">
+    <h1><a href="#" title=""><img src="images/logo1.png" alt="" /></a></h1>
+  </div>
+  <div class="topbar-data">
+    <form class="topbar-search" action="/monitorSearch" method="post" >
+      <button type="submit"><i class="ion-ios-search-strong"></i></button>
+    </form>
+  </div>
+</div><!-- Topbar -->
+
+<header class="side-header light-skin expand-header">
+  <div class="nav-head">Main Navigation <span class="menu-trigger"><i class="ion-android-menu"></i></span></div>
+  <nav class="custom-scrollbar">
+    <a href="/monitor" title=""><h4>Features</h4></a>
+      <ul class="drp-sec">
+          <li><a href="/monitor" title=""><i class="ion-crop"></i>监控</a></li>
+          <li><a href="/task" title=""><i class="ion-podium"></i>任务</a></li>
+          <li><a href="/order" title=""><i class="ion-podium"></i>订单</a></li>
+          <li><a href="/persion" title=""><i class="ion-podium"></i>人员信息</a></li>
+          <li><a href="/promotion" title=""><i class="ion-podium"></i>折扣码</a></li>
+      </ul>
+  </nav>
+</header><!-- Side Header -->
+
+<div class="option-panel">
+  <span class="panel-btn"><i class="fa ion-android-settings fa-spin"></i></span>
+  <div class="color-panel">
+    <h4>Text Color</h4>
+    <span class="color1" onclick="setActiveStyleSheet('color1'); return false;"><i></i></span>
+    <span class="color2" onclick="setActiveStyleSheet('color2'); return false;"><i></i></span>
+    <span class="color3" onclick="setActiveStyleSheet('color'); return false;"><i></i></span>
+    <span class="color4" onclick="setActiveStyleSheet('color4'); return false;"><i></i></span>
+    <span class="color5" onclick="setActiveStyleSheet('color5'); return false;"><i></i></span>
+  </div>
+</div><!-- Options Panel -->
+
+<div class="panel-content">
+
+    <div class="widget pad50-65">
+        <div class="widget-title2">
+            <a href="/task"><h4>任务组</h4></a>
+            <div class="gender-box"  >
+                <a th:if="${style_color!=NullPointerException&&style_color!=''}" th:href="${'/removtaskbystylecolor?style_color='+style_color}" style="float: right"  class="brd-rd5 btn btn-danger btn-xs">清空此货号所有任务</a>
+            </div>
+        </div>
+        <table class="table">
+            <thead class="thead-inverse">
+                <tr>
+                    <th>货号</th>
+                    <th>尺码</th>
+                    <th>购买量</th>
+                    <th>单价(每双的价格)</th>
+                    <th>任务状态</th>
+                    <th>消息</th>
+                    <th>Option</th>
+                </tr>
+            </thead>
+            <tbody>
+            <td >
+            </td>
+                <div th:each="task:${tasks}">
+                    <tr >
+                        <th><a th:href="${'https://www.nike.com/cn/t/ABC2934JWER/'+task.getStyleColor()}" th:text="${task.getStyleColor()}" target="_blank" style="color: firebrick"></a></th>
+                        <th  th:text="${task.getSize()}" ></th>
+                        <th  th:text="${task.getBuyTotal()}" ></th>
+                        <th  th:text="${'￥'+task.getCurrentPrice()}" ></th>
+                        <th  th:if="${task.getTaskStatus()==-1}" th:text="${'异常任务'}"></th>
+                        <th th:if="${task.getTaskStatus()==0}" th:text="${'仅创建任务'}" ></th>
+                        <th  th:if="${task.getTaskStatus()==1}" th:text="${'已经创建抢购任务'}"></th>
+                        <th  th:if="${task.getTaskStatus()==2}" th:text="${'无论如何已经失效'}"></th>
+                        <th  th:text="${task.getMess()}" ></th>
+                        <th>
+                            <div class="fa-hover "><a th:href="${'/removetask/'+task.getId()}"><i class="fa fa-remove" aria-hidden="true"></i>删除 <span class="text-muted">
+                        </th>
+                    </tr>
+                </div>
+            </tbody>
+        </table>
+    </div>
+</div>
+<!-- Panel Content -->
+<div class="modal fade" id="myModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">不参与</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      </div>
+      <div class="modal-body">
+        <p>您确定不再参与此货品次抢购吗？</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+        <a  id="cannelTask"  class="brd-rd30 btn btn-outline-secondary"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">清空所有</font></font></a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer >
+    <div class="pgntn style4" style="height: 10px;padding-top: 0px;margin-top: -30px">
+        <ul class="pgntn-lst">
+            <li class="prv" th:if="${tasks.hasPrevious()}" ><a class="brd-rd50" th:href="${'/task?page='+tasks.previousPageable().pageNumber}" title=""><i class="fa fa-angle-double-left"></i></a></li>
+            <li><span class="active" th:text="${tasks.getNumber()}">2</span></li>
+            <li><span>/总页数</span></li>
+            <li><a href="#" title="" th:text="${tasks.totalPages }">1</a></li>
+            <li class="nxt" th:if="${tasks.hasNext()}"><a class="brd-rd50" th:href="${'/task?page='+tasks.nextPageable().pageNumber}" title=""><i class="fa fa-angle-double-right"></i></a></li>
+        </ul>
+    </div>
+    <span th:text="${'库中总共商品数量: '+tasks.getTotalElements()+' 条'}"></span>
+</footer>
+
+<script>
+
+  function getLimit( monitorId,detailUrlId){
+    $('#monitorId').val(monitorId);
+    $('#detailUrlId').val(detailUrlId);
+    $.post("/quantityLimit/"+monitorId,
+            {
+              name:"test",
+              url:"http://www.runoob.com"
+            },
+            function(data,status){
+             var  json=$.parseJSON(data);
+              $.each(json, function (key,value) {
+                  $('.limit').append("<option >"+value+"</option>");
+              });
+            });
+  }
+  function setStyleColor(styleColor) {
+    $('#cannelTask').attr('href','/monitor/clearAll/'+styleColor);
+  }
+
+  function filter(val){
+    if(val==0){
+      window.location.href='/monitor';
+    }else if(val==1){
+      window.location.href='/monitorFilter/1';
+    }else if(val==11){
+        window.location.href='/monitorFilter/11';
+    }else if(val==12){
+        window.location.href='/confirmDay';
+    }else if(val==13){
+        window.location.href='/replenishFilter';
+    }
+
+  }
+
+
+
+</script>
+<!-- Vendor: Javascripts -->
+<script th:src="@{/js/jquery.min.js}" type="text/javascript"></script>
+<!-- Vendor: Followed by our custom Javascripts -->
+<script th:src="@{/js/bootstrap.min.js}" type="text/javascript"></script>
+<script th:src="@{/js/jquery-ui.min.js}" type="text/javascript"></script>
+<script th:src="@{/js/select2.min.js}" type="text/javascript"></script>
+<script th:src="@{/js/slick.min.js}" type="text/javascript"></script>
+
+<!-- Our Website Javascripts -->
+<script th:src="@{/js/isotope.min.js}" type="text/javascript"></script>
+<script th:src="@{/js/isotope-int.js}" type="text/javascript"></script>
+<script th:src="@{/js/jquery.counterup.js}" type="text/javascript"></script>
+<script th:src="@{/js/waypoints.min.js}" type="text/javascript"></script>
+<script th:src="@{/js/highcharts.js}" type="text/javascript"></script>
+<script th:src="@{/js/exporting.js}" type="text/javascript"></script>
+<script th:src="@{/js/highcharts-more.js}" type="text/javascript"></script>
+<script th:src="@{/js/moment.min.js}" type="text/javascript"></script>
+<script th:src="@{/js/jquery.circliful.min.js}" type="text/javascript"></script>
+<script th:src="@{/js/fullcalendar.min.js}" type="text/javascript"></script>
+<script th:src="@{/js/jquery.downCount.js}" type="text/javascript"></script>
+<script th:src="@{/js/jquery.bootstrap-touchspin.min.js}" type="text/javascript"></script>
+<script th:src="@{/js/jquery.formtowizard.js}" type="text/javascript"></script>
+<script th:src="@{/js/form-validator.min.js}" type="text/javascript"></script>
+<script th:src="@{/js/form-validator-lang-en.min.js}" type="text/javascript"></script>
+<script th:src="@{/js/cropbox-min.js}" type="text/javascript"></script>
+<script th:src="@{/js/jquery.slimscroll.min.js}" type="text/javascript"></script>
+<script th:src="@{/js/ion.rangeSlider.min.js}" type="text/javascript"></script>
+<script th:src="@{/js/jquery.poptrox.min.js}" type="text/javascript"></script>
+<script th:src="@{/js/styleswitcher.js}" type="text/javascript"></script>
+<script th:src="@{/js/main.js}" type="text/javascript"></script>
+</body>
+</html>

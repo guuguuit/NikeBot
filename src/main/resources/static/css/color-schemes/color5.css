@@ -1,0 +1,304 @@
+/*===== Color Blue =====*/
+
+/*===== Background Color =====*/ 
+.blue-bg,
+.sales-charts > ul > li a:hover,
+.sales-charts > ul > li.nav-item a.active,
+.td-lst > li.completed:before,
+#calendar .fc-head,
+#calendar .fc-event,
+#calendar .fc-toolbar > div button:hover,
+#calendar .fc-today,
+.widget-title.blue-bg:before,
+.jqvmap-zoomin:hover,
+.jqvmap-zoomout:hover,
+.slctd .pckg-bdy > a:hover,
+.contact-form button:hover,
+.prd-inf > a.cart-btn:hover,
+[type="radio"]:not(:checked) + label:after,
+[type="radio"]:checked + label:after,
+.form-wrp button:hover,
+.prod-thmb:before,
+.scl-icns > a:hover,
+.scl-shr:hover > i,
+.product-sizes-list > a:hover,
+.product-sizes-list > a.active,
+ul.steps > li,
+.form-wrp fieldset p a:hover,
+.gry-bg:hover,
+.timeline-innr:before,
+.cnt-opt button:hover,
+.switch-candy a,
+.mail-usr:before,
+.mail-prf-inr > a:hover,
+.inbox-btns > a:hover,
+.fa-hover > a:hover,
+.icon-container:hover,
+.usr-innr > a:hover,
+.usr-innr > a:focus,
+.usr-thmb > a:hover,
+.usr-thmb > a:focus,
+.wdgt-opt-lst > a:hover,
+.wdgt-opt-lst > a:focus,
+.gallery-box .lightbox > a:hover,
+.gallery-box .lightbox > a:focus,
+.fltrs-lst > li a:before,
+.add-proj:hover,
+.add-proj:focus,
+body.dark #calendar .fc-toolbar > div button:hover,
+body.dark #calendar .fc-toolbar > div button:focus,
+.pckg-bx.slctd.blue-bg,
+body.dark .btn-secondary:hover,
+body.dark .list-group-item.active,
+body.dark .list-group-item.active:hover,
+body.dark .modal-footer .btn-secondary:hover,
+body.dark .fa-hover > a:hover,
+body.dark .icon-container:hover,
+body.dark .scl-shr:hover > i,
+body.dark .scl-icns > a:hover,
+body.dark .product-sizes-list > a:hover,
+body.dark .product-sizes-list > a:focus,
+body.dark .inbox-btns > a:hover,
+.panel-btn:hover,
+.backgroundcolor-panel > span:before,
+.backgroundimg-panel > span:before
+{
+    background-color: #726aca;
+}
+
+.blue-bg-hover:hover
+{
+    background-color: #726aca !important;
+}
+
+/*===== Text Color =====*/
+.blue-clr,
+.topbar-search > button:hover,
+.tobar-links > li > a:hover i,
+.tobar-links > li > a:focus i,
+.side-header > nav ul > li > a:hover,
+.side-header > nav ul > li > a:focus,
+.side-header > nav ul > li > a:hover i,
+.side-header > div > nav ul > li > a:hover:before,
+.side-header > div > nav ul > li > a:hover,
+.side-header > div > nav ul > li > a:focus,
+.side-header > div > nav ul > li > a:hover i,
+.side-header > div > nav ul > li > a:hover:before,
+.vw-mr-act > a:hover,
+.vw-mr-act > a:focus,
+.act-pst-inr > h5 a:hover,
+.act-pst-inr > h5 a:focus,
+.prj-tl > h4 a:hover,
+.prj-tl > h4 a:focus,
+.act-pst-inr > a,
+.act-pst-inr > h6 a,
+footer > p a,
+.dvplr-inf > h4 a:hover,
+.sbcrb-itm > a:hover,
+.td-lst > li > a:hover,
+.rcnt-cmt-inf > h5 a:hover,
+.vw-mr > a:hover,
+.snd-opts a:hover,
+.snd-opts .fileContainer:hover,
+.snd-emjs:hover > a,
+.pst-inf > h4 a:hover,
+table h4 a:hover,
+.error-inner > form button:hover,
+.srch-fnd > form button:hover,
+.srch-rsult > h4 a:hover,
+.has-drp > ul > li:hover > a:before,
+.has-drp > ul > li.active > a:before,
+[type="checkbox"]:not(:checked) + label:after,
+[type="checkbox"]:checked + label:after,
+.cate > a:hover,
+.cate > a:focus,
+.inf-inr > span i.blue-clr,
+.edit-btn:hover,
+.grn-inf-lst > span.blue-clr,
+.insta-wrp > span label:hover,
+.inbx-opt-lst > span a:hover,
+.inbx-opt-lst > span a:focus,
+.inbox-srch > button:hover,
+.mal-ttl > h4 a:hover,
+.mal-ttl > h4 a:focus,
+.tooltips p a:hover,
+ol.breadcrumb > li,
+ol.breadcrumb > li:hover > a,
+ol.breadcrumb > li > a:focus,
+.nt-ftr > a:hover,
+.nt-ftr > a:focus,
+.nti-usr-inr > h5 a:hover,
+.nti-usr-inr > h5 a:focus,
+.usr-innr > h5 a:hover,
+.usr-innr > h5 a:focus,
+.usr-inf > h5 a:hover,
+.usr-inf > h5 a:focus,
+.gallery-info > span.cate a,
+.fltrs-lst > li a.selected,
+.fltrs-lst > li > a:hover,
+.fltrs-lst > li > a:focus,
+.pst-tm > a:hover,
+.pst-tm > a:focus,
+body.dark .sbcrb-itm > a:hover,
+body.dark .sbcrb-itm > a:focus,
+body.dark .lgn-frm > form .frgt:hover,
+body.dark .lgn-frm > form .frgt:focus,
+body.dark .srch-fnd > form button:hover,
+body.dark .srch-fnd > form button:focus,
+body.dark .inf-inr > span i.blue-clr,
+body.dark .invoice-dte > span i.blue-clr,
+body.dark .invoice-hd > h1.blue-clr,
+body.dark .error-inner > form button:hover,
+body.dark .error-inner > form button:focus,
+body.dark .error-inner > h2.blue-clr {
+    color: #726aca;
+}
+
+/*===== Border Color =====*/ 
+.td-lst > li.completed:before,
+.gry-bg:hover,
+.add-proj:hover,
+.add-proj:focus,
+body.dark .add-proj:hover,
+body.dark .add-proj:focus,
+body.dark .btn-secondary:hover,
+body.dark .list-group-item.active,
+body.dark .list-group-item.active:hover
+{
+    border-color: #726aca;
+}
+
+/*===== Border Top Color =====*/ 
+
+{
+    border-top-color: #726aca;
+}
+
+/*===== Border Right Color =====*/ 
+
+{
+    border-right-color: #726aca;
+}
+
+/*===== Border Bottom Color =====*/
+
+{
+    border-bottom-color: #726aca;
+}
+
+/*===== Border Left Color =====*/ 
+
+{
+    border-left-color: #726aca;
+}
+
+
+
+/*===== Color Green =====*/
+
+/*===== Background Color =====*/ 
+.green-bg,
+.side-header > nav ul > li > a:after,
+.side-header > div > nav ul > li > a:after,
+.pckg-bdy > a:hover,
+.qnty-add-crt > a:hover,
+ul.steps > li.current,
+ul.steps > li.current > span,
+.form-wrp fieldset p a,
+.pgntn .pgntn-lst > li span.active,
+.style1 .pgntn-lst > li:hover a,
+.style2 .pgntn-lst > li:hover a,
+.style3 .pgntn-lst > li:hover a,
+.style3 .pgntn-lst > li.prv:hover a, 
+.style3 .pgntn-lst > li.nxt:hover a,
+.style4 .pgntn-lst > li.prv:hover a,
+.style4 .pgntn-lst > li.nxt:hover a,
+.tab-styl2 > ul.nav-tabs > li.nav-item > a.active,
+.invoice-dte > a:hover,
+.pckg-bx.slctd.green-bg,
+body.dark .style4 .pgntn-lst > li.prv:hover a, 
+body.dark .style4 .pgntn-lst > li.nxt:hover a,
+body.dark .pgntn .pgntn-lst > li span.active,
+body.dark .style1 .pgntn-lst > li:hover a,
+body.dark .style2 .pgntn-lst > li:hover a,
+body.dark .style3 .pgntn-lst > li:hover a
+{
+    background-color: #ffba2a;
+}
+
+.green-bg-hover:hover
+{
+    background-color: #ffba2a !important;
+}
+
+/*===== Text Color =====*/ 
+.green-clr,
+.scl-msg-inr > h2 a:hover,
+.insta-inf > h2 a:hover,
+.prd-inf > h4 a:hover,
+.prd-inf > h4 a:focus,
+.prd-inf a.rev-btn:hover,
+.prd-inf a.rev-btn:focus,
+.review-btn:hover,
+.review-btn:focus,
+.product-detail-tabs > ul.nav-tabs > li > a.active,
+.product-detail-tabs > ul.nav-tabs > li > a:hover,
+.product-detail-tabs > ul.nav-tabs > li > a:focus,
+.product-detail-tabs .tab-pane > ul > li:before,
+.style1 .pgntn-lst > li.prv:hover a,
+.style1 .pgntn-lst > li.nxt:hover a,
+.style1 .pgntn-lst > li.prv a:focus,
+.style1 .pgntn-lst > li.nxt a:focus,
+.pgntn.style4 .pgntn-lst > li span.active,
+.style4 .pgntn-lst > li:hover a,
+.style4 .pgntn-lst > li a:focus,
+footer > p a:hover,
+footer > p a:focus,
+.inf-inr > span i.green-clr,
+.grn-inf-lst > span.green-clr,
+.cnt-opt-lst > span:hover,
+.mail-opt > ul > li a:hover i,
+.mail-opt > ul > li a:hover,
+.mail-opt > ul > li a:focus,
+.mail-opt > ul > li a:focus i,
+body.dark .inf-inr > span i.green-clr,
+body.dark .invoice-dte > span i.green-clr,
+body.dark .invoice-hd > h1.green-clr,
+body.dark .prd-inf a.rev-btn:hover,
+body.dark .prd-inf a.rev-btn:focus,
+body.dark .review-btn:hover,
+body.dark .review-btn:focus,
+body.dark .error-inner > h2.green-clr
+{
+    color: #ffba2a;
+}
+
+/*===== Border Color =====*/ 
+
+{
+    border-color: #ffba2a;
+}
+
+/*===== Border Top Color =====*/ 
+
+{
+    border-top-color: #ffba2a;
+}
+
+/*===== Border Right Color =====*/ 
+
+{
+    border-right-color: #ffba2a;
+}
+
+/*===== Border Bottom Color =====*/
+.tab-styl2 > ul.nav-tabs
+{
+    border-bottom-color: #ffba2a;
+}
+
+/*===== Border Left Color =====*/ 
+
+{
+    border-left-color: #ffba2a;
+}
