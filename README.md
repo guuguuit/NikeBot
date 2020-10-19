@@ -84,4 +84,15 @@ Nikebot | Nikebot源码 | NikeShoebot | Nike抢鞋 | Nike抢鞋软件 | NIKE监�
 
 3、平时抢购是基本上没问题的，但是高峰抢购，这里还需要自己优化监控的方案；监控不及时会导致失败。
 
+**效果图展示：**
+
+![](https://s1.ax1x.com/2020/10/19/0vHAUA.jpg)
+
+![](https://s1.ax1x.com/2020/10/19/0vHMDg.jpg)
+
+![](https://s1.ax1x.com/2020/10/19/0vHt2V.jpg)
+
+![](https://s1.ax1x.com/2020/10/19/0vHDa9.jpg)
+
+![](https://s1.ax1x.com/2020/10/19/0vHyP1.jpg)
 ​	
