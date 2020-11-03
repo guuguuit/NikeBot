@@ -1,6 +1,6 @@
 # Nikebot | Nikebot源码 | NikeShoebot | Nike抢鞋 | Nike抢鞋软件 | NIKE监控 | Nike监控 | Nike抢购 | Nike补货监控 | Nike抽签 | Nike破盾 | Snkrsbot | Snkrs抢购 | Snkrs抽签 | Nike发包程序 | Nike发包抢购 | Nike官网App | Nikebot源码 | NIKE AKAMAI BOT
 
-需要源码的直接加我吧，您可以作为参考，但核心技术需要付费。(仅用于学习交流，不得从事任何非法用途；本人不承担一切衍生责任。)
+需要源码的直接加我吧，您可以作为参考，但核心技术需要付费。(qq2998818882仅用于学习交流，不得从事任何非法用途；本人不承担一切衍生责任。)
 
 
 众所周知，真正的Nikebot玩家数量大、金额大，都是几千-大几万双的拿货,抽签的更是几十万账号的并发,Nikebot 难度非常高，很多人几个月都有可能没有技术性突破，主要体现在过akamai（俗称过盾）；
